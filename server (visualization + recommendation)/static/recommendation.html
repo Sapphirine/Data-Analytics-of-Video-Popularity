@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>EECS6895 Final Project</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/business-frontpage.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <style type="text/css">
+
+        div.bar {
+          display: inline-block;
+          width: 50px;
+          height: 75px; /* We'll override height later */
+          background-color: teal;
+          margin-right: 2px;
+        }
+
+        .axis path,
+        .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+        } .
+        axis text {
+        font-family: sans-serif;
+        font-size: 12px;
+        font-weight: 1000;
+        }
+
+        circle:hover {
+            fill: red;
+        }
+
+        #tooltip {
+        position: absolute;
+        width: 200px;
+        height: auto;
+        padding: 10px;
+        background-color: white;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        pointer-events: none;
+        }
+        #tooltip.hidden {
+        display: none;
+        }
+        #tooltip p {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 10px;
+      }
+      </style>
+   
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">EECS6895 Final Project</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">About</a>
+                    </li>
+                    <li>
+                        <a href="visual.html">Visualization</a>
+                    </li>
+                    <li>
+                        <a href="recommendation.html">Recommendation</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Image Background Page Header -->
+    <!-- Note: The background image is set within the business-casual.css file. -->
+    <header class="business-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="tagline">Data Analytics of Video Popularity</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<script>
+var tbns;
+function recommend(){
+  var c1 = document.getElementById('channel1').value;
+  var c2 = document.getElementById('channel2').value;
+  var c3 = document.getElementById('channel3').value;
+  var c4 = document.getElementById('channel4').value;
+  var c5 = document.getElementById('channel5').value;  
+  
+  var para = {channel1:c1,channel2:c2,channel3:c3,channel4:c4,channel5:c5};
+  var strpara = $.param( para );
+  console.log(strpara);
+
+  d3.json('/recommend?'+strpara, function(error, data){
+          jsondata = data;
+          console.log(jsondata);
+
+          tbns = d3.selectAll('.thumbnail');
+          tbns = tbns[0]
+          for (var i=0; i<tbns.length;i++){
+            x = tbns[i];
+            console.log(x);
+            x.getElementsByTagName('img')[0].src = data[i].snippet.thumbnails.default.url;
+            x.getElementsByTagName('p')[0].innerText = data[i].snippet.description;
+            x.getElementsByTagName('h4')[0].innerText = data[i].snippet.title;
+          }
+          document.getElementById('Rec_Div').removeAttribute("hidden");
+
+        });
+  
+
+}
+</script>
+
+
+
+
+    <div class="container">
+
+        <hr>
+        <div class="row">
+            <div class="col-md-6" id="input_area">
+            <h3> Please input titles of your favorate five channels:</h3>
+              <div class = "input-group">
+                <span class="input-group-addon" id="sizing-addon1">Channel1</span>
+                <input type="text" class="form-control" id="channel1" value="Alltime10s" placeholder="Channel1" aria-describedby="sizing-addon1">
+              </div>
+              <br>
+
+              <div class = "input-group">
+                <span class="input-group-addon" id="sizing-addon1">Channel2</span>
+                <input type="text" class="form-control" id="channel2" value="Ashish Singhal" placeholder="Channel2" aria-describedby="sizing-addon1">
+              </div>
+              <br>
+              <div class = "input-group">
+                <span class="input-group-addon" id="sizing-addon1">Channel3</span>
+                <input type="text" class="form-control" id="channel3" value = "DRAGUNOV911" placeholder="Channel3" aria-describedby="sizing-addon1">
+              </div>
+              <br>
+              <div class = "input-group">
+                <span class="input-group-addon" id="sizing-addon1">Channel4</span>
+                <input type="text" class="form-control" id="channel4" value="Kingrich Media" placeholder="Channel4" aria-describedby="sizing-addon1">
+              </div>
+              <br>
+              <div class = "input-group">
+                <span class="input-group-addon" id="sizing-addon1">Channel5</span>
+                <input type="text" class="form-control" id="channel5" value="BSG" placeholder="Channel5" aria-describedby="sizing-addon1">
+              </div>
+              <br>
+              <button type="button" class="btn btn-primary" onclick="recommend()">Submit</button>
+              <br>
+            </div>
+        </div>
+
+        <div class="row"  id= "Rec_Div"hidden>
+          <h2>Recommendation Results:</h1>
+          <div class="col-md-2" id="Recommendation_Area">
+            <div class="thumbnail">
+              <img src="..." alt="...">
+              <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>...</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2" id="Recommendation_Area">
+            <div class="thumbnail">
+              <img src="..." alt="...">
+              <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>...</p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-2" id="Recommendation_Area">
+            <div class="thumbnail">
+              <img src="..." alt="...">
+              <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>...</p>
+              </div>
+            </div>
+          </div>
+ 
+          <div class="col-md-2" id="Recommendation_Area">
+            <div class="thumbnail">
+              <img src="..." alt="...">
+              <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2" id="Recommendation_Area">
+            <div class="thumbnail">
+              <img src="..." alt="...">
+              <div class="caption">
+                <h4>Thumbnail label</h4>
+                <p>...</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+          </div>
+        </div>
+
+
+        <hr>
+
+
+    <script>
+    var dataset;
+    var jsondata;
+
+    d3.json('Xpca.json', function(error, data){
+      if (error) { //If error is not null, something went wrong.
+        console.log(error); //Log the error.
+      } else { //If no error, the file loaded correctly. Yay!
+        dataset = data;
+        generateVis();
+      }
+    });
+
+    function generateVis(){
+      var w = 800;
+      var h = 600;
+      var padding = 40;
+      var svg = d3.select('div#bubble_chart').append('svg').attr("width",w).attr("height",h);
+
+      //define scales
+      var colorscale = d3.scale.category10();
+      var xscale = d3.scale.sqrt()
+      .domain([d3.min(dataset, function(d) { return d.x; }),d3.max(dataset, function(d) { return d.x;})]).range([padding,w-padding]);
+      var yscale = d3.scale.sqrt()
+      .domain([d3.min(dataset, function(d) { return d.y; }),d3.max(dataset, function(d) { return d.y;})]).range([padding,h-padding]);
+      
+      //draw circle
+      var circles = svg.selectAll("circle")
+      .data(dataset)
+      .enter()
+      .append("circle");
+
+      circles.attr("cx", function(d) {
+        return xscale(d.x);
+      })
+      .attr("cy", function(d){ return yscale(d.y);})
+      .attr("r", function(d) {
+        switch(d.response) {
+          case 1:
+            return 5;
+            break;
+          case 2:
+            return 8;
+          break;
+        default:
+          return 15;
+        }
+      })
+      .attr("fill", function(d) {
+        return colorscale(d.response);
+      })
+      .attr("stroke","white");
+
+      //create xaxis and yaxis
+
+      var xAxis = d3.svg.axis()
+      .scale(xscale)
+      .orient("bottom");
+
+      var yAxis = d3.svg.axis()
+      .scale(yscale)
+      .orient("left");
+
+
+      svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0,"+ (h - padding) + ")")
+      .call(xAxis);
+
+      svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(" + padding + ",0)")
+      .call(yAxis);
+
+      circles.on("click", function(d) {
+        d3.json('/get_channel_info/'+d.id, function(error, data){
+          jsondata = data;
+          console.log(jsondata);
+          update_table();
+        });
+      })
+      .on("mouseout", function(d) {
+      });
+    }
+
+
+    function update_table(){
+      d3.select("td#channel_image").select('img').attr("src",jsondata[0].snippet.thumbnails.default.url);
+      d3.select("td#channel_title").text(jsondata[0].snippet.title);
+      d3.select("td#channel_description").text(jsondata[0].snippet.description);
+      d3.select("td#views").text(jsondata[0].statistics.viewCount);
+      d3.select("td#days").text(jsondata[1].time);
+      d3.select("td#frequency").text(jsondata[1].freq);
+
+      d3.select("td#reference").text(jsondata[1].ref);
+      d3.select("td#ctov").text(jsondata[1].ctov);
+      d3.select("td#ctos").text(jsondata[1].sentiment);
+      d3.select("td#cname").text(jsondata[1].cname);
+
+
+    }
+
+
+
+    </script>
+
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; 2016</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
