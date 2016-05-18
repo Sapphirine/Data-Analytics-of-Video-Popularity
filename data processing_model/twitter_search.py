@@ -11,38 +11,10 @@ import oauth2
 import threading
 
 #Twitter API consumer key, consumer secret, access token, access token secret
-L_consumer_key = ["T8WrwhnwQnE3IX2A7mFqbpCIT",\
-"fLkI39SpxbkHMxgHlTSa46F72",\
-"hsCMEsqOmQwOdU04tFvm4SgeA",\
-"t5kqnr3NRYi4fS5nffddKOLR5",\
-"7gApvo9rj6mCITc4y6qN2LbN3",\
-"tT6BAAXZPoOUeIhs0qnnaXgvM",\
-"uG7ToXZFgocxoO5v3jUhLaIxz",\
-"AL1xhsa0PSQpQiOV3aPjRmirb"]
-L_consumer_secret = ["2iDnykacVlXI7cJ5T8wl6tYM1NrbCIUi81caRbHL4MgUEXDuMv",\
-"L8w8yenWSnLxNwyyLW4fzZM7arEe1GjqBKK3WP4RAAjSRsJCkf",\
-"kaHDv6ppy8ovB9B6p8DNQ2YymAthyvUcEqwGS4jIXXx9GmI9cm",\
-"TRitd4EzwFKq5ftG3oYfQ5gksUR93JtpjrnC7DYWcoWfXuip6w",\
-"8yOmMHsjuIFJECG1lHemZfslve1EZSCCbJZwH9EBxmvBQz0nYX",\
-"qcsD4ohIV4MUpcJkXNV3JB7yzIIDzmFCavMiT69ZvdqNdJVZdn",\
-"h5eF79XmchDOTFmq6P0pip2f0cOsdnEIfJgsKyRwSGaC2i5aIb",\
-"FnHVlJ0OY1Uhu9BK35i3zcrGNBHAwpOFtMYA5sPCefV3FJv960"]
-L_access_token = ["4899887134-rLTFjp5JMuTVFrJfrqcp1UR0Xre4vuJFGXm6IrE",\
-"4899887134-IfiqsXZyfyC4Uu6k99CB0RLDpPf805c6APF3GGZ",\
-"4899887134-8RXx6KjhXjloBcwXgOODeesfPrrHQOCuOZyEe2D",\
-"4899887134-eAcoEhw81wNKnAABOGn2ioE6W35mijY946WSMXG",\
-"4899887134-RJNBsUAPo1pYYHDOkJuZdhLXlR51xB8dqksWDNL",\
-"4899887134-cJyVOE7xGN9yT7BNLvR7sQTYRbbHisyhGaC9UG4",\
-"4899887134-EbWkRVlIgE4itnNxbRvzRwGLbXZS726RvuKaszp",\
-"4899887134-MsuloSjCKBf4fgaBFVI724zK6jdx4REOEHDwRaG"]
-L_access_token_secret = ["jxHaMOrSTN28ZNYz3NSRbtu9Cx8lPLhoM1gX3SHQbs0q5",\
-"ip2tEXnVWo3Iuv3PpCJiwjEtdCEsMoMZUFj39bOZDyHxA",\
-"uX0in8BwfTFqaE3TRAYglqE3r5ZpkRmBKt1n3y2LCS2bh",\
-"4k71TRtnv6avEu55L7dI3Z6k1RiclHFbsSNZMlavnVOSR",\
-"MWnxoa14YSKYdcTOUkOnD0BAp7Bpgft1amcmIP8aHqKC7",\
-"ilHWGSiWxvU0Bci5WlllPf20bMDN8MreM1gJGiHKVXpB0",\
-"UvnUaTp2MXwbLTRBJpAf3vTOkefw85TsRwvXBVbT306J8",\
-"qv9becPR5oJKYToXBTstyS3SEpTrhx3C61sIigTLAuSqW"]
+L_consumer_key = ["Your Consumer Key List"]
+L_consumer_secret = ["Your Consumer Secret List"]
+L_access_token = ["Your Access Token List"]
+L_access_token_secret = ["Your Access Token Secret List"]
 
 
 
